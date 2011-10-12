@@ -1,0 +1,40 @@
+Simple Bottle server that lets you track how long an image display is attempted.
+
+There's a neat property of web browsers that follows 301s when displaying
+images. This can be exploited for emails to determine how long the email was
+left open, by pausing for a second between redirects. As long as the redirect
+is being followed, the email is still open.
+
+$ python ./server.py 
+Bottle server starting up (using WSGIRefServer())...
+Listening on http://0.0.0.0:8080/
+Use Ctrl-C to quit.
+
+localhost - - [12/Oct/2011 16:57:30] "GET /track/0 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:31] "GET /track/1 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:32] "GET /track/2 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:33] "GET /track/3 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:34] "GET /track/4 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:35] "GET /track/5 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:36] "GET /track/6 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:37] "GET /track/7 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:38] "GET /track/8 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:39] "GET /track/9 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:40] "GET /track/10 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:41] "GET /track/11 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:42] "GET /track/12 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:43] "GET /track/13 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:44] "GET /track/14 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:45] "GET /track/15 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:46] "GET /track/16 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:47] "GET /track/17 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:48] "GET /track/18 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:49] "GET /track/19 HTTP/1.1" 303 0
+localhost - - [12/Oct/2011 16:57:50] "GET /track/20 HTTP/1.1" 303 0
+
+Notes
+- This is a proof of concept and not suitable unless implemented with an
+  asynchronous server such as node.js or Tornado
+- Chrome/Firefox will follow 20 redirects and Safari will follow 16.
+- That issue can be circumvented by adding multiple images whose first request waits 20s,
+  40s, etc
